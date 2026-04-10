@@ -43,7 +43,7 @@ nav.scrolled{box-shadow:0 2px 30px rgba(0,0,0,.08)}
 .btn-secondary{background:transparent;color:var(--text);padding:14px 32px;border-radius:50px;font-weight:600;font-size:1rem;border:2px solid var(--border);transition:all .3s;display:inline-flex;align-items:center;gap:8px;cursor:pointer}
 .btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
 .hero-visual{position:relative}
-.hero-img{width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,var(--accent-light),#dbeafe);border-radius:var(--radius);display:flex;align-items:center;justify-content:center}
+.hero-img{width:100%;aspect-ratio:4/3;background:url(https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1400&q=80) center/cover no-repeat,#dbeafe);border-radius:var(--radius);display:flex;align-items:center;justify-content:center}
 .hero-img svg{width:180px;height:180px;opacity:.3}
 .hero-stats{display:flex;gap:32px;margin-top:48px}
 .stat-number{font-family:'Sora',sans-serif;font-size:2rem;font-weight:700;color:var(--accent)}
@@ -82,7 +82,7 @@ section{padding:100px 0}
 
 /* ABOUT */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.about-img{aspect-ratio:4/3;background:linear-gradient(135deg,#dbeafe,var(--accent-light));border-radius:var(--radius)}
+.about-img{aspect-ratio:4/3;background:url(https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1000&q=80) center/cover no-repeat);border-radius:var(--radius)}
 .about-features{display:flex;flex-direction:column;gap:20px;margin-top:32px}
 .about-feature{display:flex;gap:16px;align-items:flex-start}
 .about-feature-icon{width:40px;height:40px;min-width:40px;background:var(--accent-light);border-radius:10px;display:flex;align-items:center;justify-content:center}
@@ -139,6 +139,25 @@ footer p{color:rgba(255,255,255,.6);font-size:.9rem}
 }
 .fade-up{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.16,1,.3,1)}
 .fade-up.visible{opacity:1;transform:translateY(0)}
+
+.animate-on-scroll{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.animate-on-scroll.animate-in{opacity:1;transform:translateY(0)}
+.animate-on-scroll:nth-child(2){transition-delay:.1s}
+.animate-on-scroll:nth-child(3){transition-delay:.2s}
+.animate-on-scroll:nth-child(4){transition-delay:.3s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.gallery-item{aspect-ratio:4/3;border-radius:var(--radius,12px);overflow:hidden;cursor:pointer;position:relative}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.gallery-item:hover img{transform:scale(1.08)}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.review-card{padding:32px;border-radius:var(--radius,12px);position:relative}
+.review-stars{color:#F59E0B;font-size:1.1rem;margin-bottom:12px;letter-spacing:2px}
+.review-text{font-size:.95rem;line-height:1.7;margin-bottom:16px;font-style:italic}
+.review-author{font-weight:600;font-size:.9rem}
+.review-source{font-size:.8rem;opacity:.6;margin-top:2px}
+@media(max-width:768px){.gallery-grid{grid-template-columns:repeat(2,1fr)}.reviews-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -320,6 +339,23 @@ footer p{color:rgba(255,255,255,.6);font-size:.9rem}
   </div>
 </section>
 
+
+<section id="galerie" class="alt-bg" style="padding:100px 0">
+<div class="container">
+<div class="section-header center">
+<div class="section-label">Galerie</div>
+<h2 class="section-title">Unsere Praxis</h2>
+</div>
+<div class="gallery-grid">
+<div class="gallery-item animate-on-scroll"><img src="https://images.unsplash.com/photo-1571772996211-2f02c9727629?w=800&q=80" alt="Unsere Praxis" loading="lazy"></div>
+<div class="gallery-item animate-on-scroll"><img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=800&q=80" alt="Unsere Praxis" loading="lazy"></div>
+<div class="gallery-item animate-on-scroll"><img src="https://images.unsplash.com/photo-1629909615184-74f495363b67?w=800&q=80" alt="Unsere Praxis" loading="lazy"></div>
+<div class="gallery-item animate-on-scroll"><img src="https://images.unsplash.com/photo-1445527815219-ecbfec67492e?w=800&q=80" alt="Unsere Praxis" loading="lazy"></div>
+<div class="gallery-item animate-on-scroll"><img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=800&q=80" alt="Unsere Praxis" loading="lazy"></div>
+<div class="gallery-item animate-on-scroll"><img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&q=80" alt="Unsere Praxis" loading="lazy"></div>
+</div>
+</div>
+</section>
 <section id="kontakt">
   <div class="container">
     <div class="section-header center fade-up">
@@ -384,6 +420,93 @@ footer p{color:rgba(255,255,255,.6);font-size:.9rem}
 window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>20)});
 const observer=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')})},{threshold:.1});
 document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var toggle=document.querySelector('.mobile-toggle');
+  var nav=document.querySelector('.nav-links');
+  if(toggle&&nav){toggle.addEventListener('click',function(){nav.classList.toggle('open');toggle.classList.toggle('active')})}
+  var observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('animate-in');observer.unobserve(e.target)}})
+  },{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+  document.querySelectorAll('.animate-on-scroll').forEach(function(el){observer.observe(el)});
+  var navbar=document.querySelector('nav');
+  window.addEventListener('scroll',function(){
+    var st=window.scrollY;
+    if(navbar){if(st>50)navbar.classList.add('scrolled');else navbar.classList.remove('scrolled')}
+  });
+  document.querySelectorAll('.counter').forEach(function(counter){
+    var obs2=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          var target=+e.target.dataset.target;
+          var suffix=e.target.dataset.suffix||'';
+          var dur=1500;var start=performance.now();
+          var animate=function(now){
+            var elapsed=now-start;var progress=Math.min(elapsed/dur,1);
+            var eased=1-Math.pow(1-progress,3);
+            e.target.textContent=Math.round(target*eased).toLocaleString('de-DE');
+            if(progress<1)requestAnimationFrame(animate);
+            else e.target.textContent=target.toLocaleString('de-DE')+suffix;
+          };
+          requestAnimationFrame(animate);obs2.unobserve(e.target);
+        }
+      });
+    },{threshold:0.5});
+    obs2.observe(counter);
+  });
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      var target=document.querySelector(a.getAttribute('href'));
+      if(target){target.scrollIntoView({behavior:'smooth',block:'start'})}
+      if(nav&&nav.classList.contains('open')){nav.classList.remove('open');if(toggle)toggle.classList.remove('active')}
+    });
+  });
+  var hero=document.querySelector('.hero-img,.hero-visual,.hero');
+  if(hero&&window.innerWidth>768){
+    window.addEventListener('scroll',function(){
+      var st=window.scrollY;
+      if(st<800){hero.style.transform='translateY('+st*0.15+'px)'}
+    });
+  }
+  document.querySelectorAll('.gallery-item').forEach(function(item){
+    item.addEventListener('click',function(){
+      var img=item.querySelector('img');
+      if(!img)return;
+      var src=img.src;
+      var overlay=document.createElement('div');
+      overlay.className='lightbox-overlay';
+      overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:10000;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:fadeIn .3s';
+      var content=document.createElement('div');
+      content.className='lightbox-content';
+      var lbImg=document.createElement('img');
+      lbImg.src=src;
+      lbImg.alt='Gallery';
+      lbImg.style.cssText='max-width:90vw;max-height:85vh;border-radius:8px;object-fit:contain';
+      var closeBtn=document.createElement('button');
+      closeBtn.className='lightbox-close';
+      closeBtn.textContent='\u00D7';
+      closeBtn.style.cssText='position:absolute;top:20px;right:24px;background:none;border:none;color:#fff;font-size:2.5rem;cursor:pointer;line-height:1';
+      content.appendChild(lbImg);
+      content.appendChild(closeBtn);
+      overlay.appendChild(content);
+      overlay.addEventListener('click',function(){overlay.remove()});
+      document.body.appendChild(overlay);
+    });
+  });
+  var btt=document.createElement('button');
+  btt.textContent='\u2191';
+  btt.className='back-to-top';
+  btt.style.cssText='position:fixed;bottom:32px;right:32px;width:48px;height:48px;border-radius:50%;border:none;background:var(--accent,#333);color:#fff;font-size:1.2rem;cursor:pointer;opacity:0;transform:translateY(20px);transition:all .3s;z-index:9000;box-shadow:0 4px 20px rgba(0,0,0,.2)';
+  document.body.appendChild(btt);
+  btt.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+  window.addEventListener('scroll',function(){
+    if(window.scrollY>600){btt.style.opacity='1';btt.style.transform='translateY(0)'}
+    else{btt.style.opacity='0';btt.style.transform='translateY(20px)'}
+  });
+});
 </script>
 </body>
 </html>
